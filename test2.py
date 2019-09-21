@@ -1,8 +1,10 @@
 from myDes import *
+import des
 import importlib
-#again I wrote a no comment code
-key = create_subkey("some key")
-encrypted=encrypy_block("中文12", key)
+
+# again I wrote a no comment code
+key = "some key"
+encrypted = encrypt("加密测试test", key)
 print(encrypted)
-decrypted=decrypt_block(encrypted, key)
+decrypted = decrypt(encrypted, key)
 print(decrypted)

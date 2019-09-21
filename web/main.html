@@ -1,0 +1,85 @@
+<html>
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>DES CALCULATOR</title>
+    <script type="text/javascript" src="/eel.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <form method="post">
+                <p>
+                    <label for="key1">
+                        Key(Support any utf8 character, but would discard after 8 bytes)
+                    </label>
+                    <input class="form-control w-75" id="key1" type="text" value="">
+                </p>
+                <p>
+                    <label for="data1">
+                        Input Data(Support any utf8 character)
+                    </label>
+                    <textarea class="form-control w-75" id="data1" rows="10"></textarea>
+                </p>
+                <p>
+                    <button id="encrypt" type="button" class="btn btn-primary  w-75">Encrypt</button>
+                </p>
+                <p>
+                    <label for="encrypted">
+                        Encrypted Data(Hex)
+                    </label>
+                    <textarea class="form-control w-75" id="encrypted" name="encrypted" rows="10"
+                              disabled="disabled"></textarea>
+                </p>
+
+            </form>
+        </div>
+        <div class="col">
+            <form method="post">
+                <p>
+                    <label for="key2">
+                        Key(Support any utf8 character, but would discard after 8 bytes)
+                    </label>
+                    <input class="form-control w-75" id="key2" type="text" value="">
+                </p>
+                <p>
+                    <label for="data2">
+                        Encrypted Data(Hex)
+                    </label>
+                    <textarea class="form-control w-75" id="data2" rows="10"></textarea>
+                </p>
+                <p>
+                    <button id="decrypt" type="button" class="btn btn-primary  w-75">Decrypt</button>
+                </p>
+                <p>
+                    <label for="decrypted">
+                        Decrypted data(Text)
+                    </label>
+                    <textarea class="form-control w-75" id="decrypted" name="encrypted" rows="10"
+                              disabled="disabled"></textarea>
+                </p>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="jquery-3.4.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="main.js"></script>
+</body>
+<html>
