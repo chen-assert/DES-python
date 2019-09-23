@@ -1,3 +1,4 @@
+#use 0 to fix the index shift
 IP = (
     0,
     58, 50, 42, 34, 26, 18, 10, 2,

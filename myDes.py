@@ -1,18 +1,25 @@
 # encoding: utf-8
 from data import *
-import numpy as np
+# import numpy as np
 import math
 import eel
 
 
+# left shifts
 def shift(block28, len, contain_none=True):
-    # why I persist in the 0-None?
     newblock = [None] + block28[len + 1:] + block28[1:len + 1]
     # print(newblock)
     return newblock
 
 
 def transfer(oldlist, t):
+    """
+    Use t to do permute for oldlist
+
+    :param oldlist:{list}
+    :param t:{list}the list which use to permute
+    :return: newlist{list}
+    """
     newlist = [None] * len(t)
     for i in range(len(t)):
         newlist[i] = oldlist[t[i]]
@@ -20,6 +27,12 @@ def transfer(oldlist, t):
 
 
 def to_binary_text(text_plain):
+    """
+    Turn plain text to binary(string)
+
+    :param text_plain:
+    :return:
+    """
     # bin(int("中".encode().hex(), 16)='0b111001001011100010101101'
     # -2是为了删掉"0b"
     re = ''.join(
@@ -30,6 +43,11 @@ def to_binary_text(text_plain):
 
 
 def to_binary_hex(hex_text):
+    """
+    Turn hex string to binary(string)
+    :param hex_text:
+    :return:
+    """
     # the first format is to construct the string that indicate the format length
     re = '{{0:0{}b}}'.format(len(hex_text) * 4).format(int(hex_text, 16), 'b')
     return re
@@ -53,7 +71,7 @@ def create_subkey(key_text):
     return k
 
 
-def listXOR(a, b):
+def listXOR(a: list, b: list):
     assert len(a) == len(b)
     c = [None] * len(a)
     for i in range(len(a)):
@@ -74,6 +92,12 @@ def f(r, k):
 
 
 def extract_from_sbox(bit6, snum):
+    """
+    sbox transformation
+    :param bit6:
+    :param snum:
+    :return:
+    """
     assert len(bit6) == 6
     mul = [32, 8, 4, 2, 1, 16]
     bit6 = [mul[i] * bit6[i] for i in range(6)]
@@ -83,8 +107,16 @@ def extract_from_sbox(bit6, snum):
     return bit4
 
 
+# use eel.expose to support javascript call
 @eel.expose
 def encrypt(message: str, key_text, padding=True) -> str:
+    """
+    encrypt whole message
+    :param message:
+    :param key_text:
+    :param padding:whether to use PCKS7 padding
+    :return: encrypted message in hex str
+    """
     try:
         key = create_subkey(key_text)
     except Exception:
@@ -104,6 +136,13 @@ def encrypt(message: str, key_text, padding=True) -> str:
 
 @eel.expose
 def decrypt(ciphermessage: str, key_text, padding=True) -> str:
+    """
+    encrypt whole message
+    :param ciphermessage:
+    :param key_text:
+    :param padding:
+    :return:decrypted message
+    """
     try:
         key = create_subkey(key_text)
     except Exception:
@@ -132,6 +171,12 @@ def decrypt(ciphermessage: str, key_text, padding=True) -> str:
 
 
 def encrypt_block(block: str, key):
+    """
+    encrypt for single block
+    :param block:
+    :param key:
+    :return: encrypted hex list
+    """
     assert len(block) == 64
     # message2 = to_binary(message)
     block2 = [None] + list(map(int, block))
@@ -151,6 +196,13 @@ def encrypt_block(block: str, key):
 
 
 def decrypt_block(cipherblock: str, key, decode=False):
+    """
+    decrypt for single block
+    :param cipherblock:
+    :param key:
+    :param decode: whether to decode hex to str
+    :return: decrypted hex list
+    """
     # assert len(cipherblock) == 64
     # cipherblock = to_binary_hex(cipherblock)
     ciphertext3 = [None] + list(map(int, cipherblock))
@@ -173,11 +225,13 @@ def decrypt_block(cipherblock: str, key, decode=False):
     return decrypted_decode
 
 
-class DesKey(object):
-    pass
-
-
 def index_convert(IP, num=8):
+    """
+    add a '0' in index 0
+    :param IP:
+    :param num:
+    :return:
+    """
     print('IP = (\n0,')
     n = 0
     for i in IP:
@@ -188,4 +242,10 @@ def index_convert(IP, num=8):
 
 
 def utf8len(s):
+    """
+    return the byte length for utf8 str
+
+    :param s: str
+    :return: utf8len
+    """
     return len(s.encode('utf-8'))

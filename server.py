@@ -1,3 +1,4 @@
+# encoding: utf-8
 import eel
 import myDes
 
@@ -9,5 +10,4 @@ my_options = {
     # 'chromeFlags': ["--start-fullscreen", "--browser-startup-dialog"]
     'chromeFlags': ["--start-fullscreen"]
 }
-
 eel.start('main.html', options=my_options)

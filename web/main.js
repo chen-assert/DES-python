@@ -5,7 +5,7 @@ $(document).ready(function () {
     $("#decrypt").click(function () {
         jsdecrypt($("#data2")[0].value, $("#key2")[0].value, $("#decrypted"));
     });
-
+    //because the cross-language call is not synchronous, need use async way
     async function jsencrypt(message, key, output) {
         let value = await eel.encrypt(message, key)();
         output.text(value);
