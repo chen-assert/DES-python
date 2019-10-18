@@ -1,5 +1,5 @@
 # encoding: utf-8
-from data import *
+from .data import *
 # import numpy as np
 import math
 import eel
@@ -119,7 +119,8 @@ def encrypt(message: str, key_text, padding=True) -> str:
     try:
         key = create_subkey(key_text)
     except Exception:
-        return "Create subkey fail, its length may not enough(>=8 bytes)"
+        raise ValueError("Create subkey fail, its length may not enough(>=8 bytes)")
+        #return "Create subkey fail, its length may not enough(>=8 bytes)"
     if padding == True and utf8len(message) % 8 != 0:
         # need padding
         pad_len = 8 - (utf8len(message) % 8)
@@ -145,19 +146,22 @@ def decrypt(ciphermessage: str, key_text, padding=True) -> str:
     try:
         key = create_subkey(key_text)
     except Exception:
-        return "Create subkey fail, its length may not enough(>=8 bytes)"
+        raise ValueError("Create subkey fail, its length may not enough(>=8 bytes)")
+        #return "Create subkey fail, its length may not enough(>=8 bytes)"
     decrypted_hex: str = ""
     try:
         assert utf8len(ciphermessage) % 16 == 0
     except Exception:
-        return "Sth went wrong, maybe your input data is illegal"
+        raise ValueError("Sth went wrong, maybe your input data is illegal")
+        #return "Sth went wrong, maybe your input data is illegal"
     ciphermessage_binary = to_binary_hex(ciphermessage)
     for i in range(len(ciphermessage_binary) // 64):
         decrypted_hex += decrypt_block(ciphermessage_binary[i * 64:i * 64 + 64], key)
     try:
         decrypted = bytes.fromhex(decrypted_hex).decode('utf-8')
     except Exception:
-        return "Sth went wrong, maybe your key is wrong"
+        raise ValueError("Sth went wrong, maybe your key is wrong")
+        #return "Sth went wrong, maybe your key is wrong"
     if padding == True:
         last = ord(decrypted[-1])
         if last < 8:
