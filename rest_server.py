@@ -1,5 +1,5 @@
 import sys
-sys.path.append("..")
+#sys.path.append("..")
 from myDes import *
 from bottle import unicode
 from flask import Flask, jsonify, abort, make_response, request
